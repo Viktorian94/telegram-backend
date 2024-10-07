@@ -25,6 +25,8 @@ export class AuthController {
       photoUrl: query.photo_url,
     });
     res.redirect(`/profile/${user.id}`);
+
+    return res.json({ id: user.id });
   }
 
   private checkTelegramAuth(data: any): boolean {

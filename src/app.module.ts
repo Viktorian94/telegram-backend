@@ -11,9 +11,9 @@ import { User } from './users/users.entity';
     ConfigModule.forRoot({ isGlobal: true }),
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
-      useFactory: async (configService: ConfigService) => ({
+      useFactory: async () => ({
         type: 'postgres',
-        url: configService.get<string>('DATABASE_URL'),
+        url: process.env.DATABASE_URL,
         ssl: {
           rejectUnauthorized: false,
         },

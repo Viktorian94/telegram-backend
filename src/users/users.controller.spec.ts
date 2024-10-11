@@ -7,6 +7,7 @@ import { User } from './users.entity';
 
 describe('UsersController', () => {
   let controller: UsersController;
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   let service: UsersService;
 
   beforeEach(async () => {

@@ -11,7 +11,7 @@ export class TelegramService implements OnModuleInit {
     private configService: ConfigService,
     private usersService: UsersService
   ) {
-    const botToken = this.configService.get<string>('TELEGRAM_BOT_TOKEN');
+    const botToken = process.env.TELEGRAM_BOT_TOKEN;
     this.bot = new Telegraf(botToken);
   }
 

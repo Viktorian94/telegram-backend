@@ -14,7 +14,7 @@ export class UsersController {
   @Get()
   async getAllUsers(
     @Query('page') page = 1,
-    @Query('limit') limit = 10,
+    @Query('limit') limit = 10
   ): Promise<User[]> {
     return this.usersService.findAll({ page, limit });
   }
@@ -23,7 +23,7 @@ export class UsersController {
   async searchUsers(
     @Query('q') query: string,
     @Query('page') page = 1,
-    @Query('limit') limit = 10,
+    @Query('limit') limit = 10
   ): Promise<User[]> {
     return this.usersService.searchUsers(query, { page, limit });
   }

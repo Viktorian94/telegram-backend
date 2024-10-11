@@ -1,4 +1,3 @@
-// src/telegram/telegram.service.ts
 import { Injectable, OnModuleInit } from '@nestjs/common';
 import { Telegraf, Markup } from 'telegraf';
 import { ConfigService } from '@nestjs/config';
@@ -10,7 +9,7 @@ export class TelegramService implements OnModuleInit {
 
   constructor(
     private configService: ConfigService,
-    private usersService: UsersService,
+    private usersService: UsersService
   ) {
     const botToken = this.configService.get<string>('TELEGRAM_BOT_TOKEN');
     this.bot = new Telegraf(botToken);
@@ -34,7 +33,7 @@ export class TelegramService implements OnModuleInit {
         `Hello, ${profileData.first_name}! Please, share your number.`,
         Markup.keyboard([Markup.button.contactRequest('📞 Send the number')])
           .oneTime()
-          .resize(),
+          .resize()
       );
     });
 

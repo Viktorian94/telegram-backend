@@ -8,7 +8,7 @@ import { User } from './users.entity';
 export class UsersService {
   constructor(
     @InjectRepository(User)
-    private usersRepository: Repository<User>,
+    private usersRepository: Repository<User>
   ) {}
 
   async createOrUpdate(userData: Partial<User>): Promise<User> {
@@ -39,7 +39,7 @@ export class UsersService {
 
   async searchUsers(
     query: string,
-    options: { page: number; limit: number },
+    options: { page: number; limit: number }
   ): Promise<User[]> {
     const { page, limit } = options;
     return this.usersRepository.find({

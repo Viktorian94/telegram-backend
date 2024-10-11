@@ -8,7 +8,7 @@ import { UsersService } from '../users/users.service';
 export class AuthController {
   constructor(
     private configService: ConfigService,
-    private usersService: UsersService,
+    private usersService: UsersService
   ) {}
 
   @Get('telegram/callback')

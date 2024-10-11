@@ -6,6 +6,7 @@ import { UsersService } from '../users/users.service';
 @Injectable()
 export class TelegramService implements OnModuleInit {
   private bot: Telegraf;
+  private webhookPath: string;
 
   constructor(
     private configService: ConfigService,
@@ -13,6 +14,7 @@ export class TelegramService implements OnModuleInit {
   ) {
     const botToken = process.env.TELEGRAM_BOT_TOKEN;
     this.bot = new Telegraf(botToken);
+    this.webhookPath = `/telegram/${botToken}`;
   }
 
   async onModuleInit() {
@@ -50,8 +52,12 @@ export class TelegramService implements OnModuleInit {
         await ctx.reply('Share Your contact.');
       }
     });
+  }
+  getBot() {
+    return this.bot;
+  }
 
-    await this.bot.launch();
-    console.log('Telegram bot started');
+  getWebhookPath() {
+    return this.webhookPath;
   }
 }

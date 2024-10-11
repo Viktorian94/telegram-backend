@@ -12,37 +12,35 @@ export class AuthController {
   ) {}
 
   @Get('telegram/callback')
-  async telegramCallback(@Query() query: any, @Res() res: Response) {
-    if (!this.checkTelegramAuth(query)) {
-      return res.status(403).send('Unauthorized');
+  async telegramCallback(@Query() data: any, @Res() res: Response) {
+    if (!this.checkTelegramAuth(data)) {
+      return res.status(403).json({ message: 'Unauthorized' });
     }
 
     const user = await this.usersService.createOrUpdate({
-      telegramId: query.id,
-      firstName: query.first_name,
-      lastName: query.last_name,
-      username: query.username,
-      photoUrl: query.photo_url,
+      telegramId: data.id,
+      firstName: data.first_name,
+      lastName: data.last_name,
+      username: data.username,
+      photoUrl: data.photo_url,
     });
-    res.redirect(`/profile/${user.id}`);
-
-    return res.json({ id: user.id });
+    return res.redirect(`/profile?userId=${user.id}`);
   }
 
   private checkTelegramAuth(data: any): boolean {
-    const botToken = this.configService.get<string>('TELEGRAM_BOT_TOKEN');
-    const secretKey = crypto.createHash('sha256').update(botToken).digest();
-    const dataCheckString = Object.keys(data)
+    const secret = crypto
+      .createHash('sha256')
+      .update(process.env.TELEGRAM_BOT_TOKEN)
+      .digest();
+    const checkString = Object.keys(data)
       .filter((key) => key !== 'hash')
       .sort()
       .map((key) => `${key}=${data[key]}`)
       .join('\n');
-
-    const hmac = crypto
-      .createHmac('sha256', secretKey)
-      .update(dataCheckString)
+    const hash = crypto
+      .createHmac('sha256', secret)
+      .update(checkString)
       .digest('hex');
-
-    return hmac === data.hash;
+    return hash === data.hash;
   }
 }

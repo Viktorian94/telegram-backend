@@ -26,19 +26,19 @@ export class TelegramService implements OnModuleInit {
   async onModuleInit() {
     this.bot.start(async (ctx) => {
       await ctx.reply(
-        'Ласкаво просимо! Будь ласка, поділіться своїм контактом.',
+        'Ласкаво просимо! Натисніть кнопку нижче, щоб відкрити додаток.',
         {
           reply_markup: {
-            keyboard: [
+            inline_keyboard: [
               [
                 {
-                  text: 'Поділитися контактом',
-                  request_contact: true,
+                  text: 'Відкрити додаток',
+                  web_app: {
+                    url: 'https://telegram-auth-frontend.vercel.app/',
+                  },
                 },
               ],
             ],
-            resize_keyboard: true,
-            one_time_keyboard: true,
           },
         }
       );

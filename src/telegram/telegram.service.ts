@@ -57,7 +57,7 @@ export class TelegramService implements OnModuleInit {
       await ctx.reply('Дякуємо! Ваш контакт збережено.');
     });
 
-    const domain = this.configService.get<string>('DOMAIN');
+    const domain = process.env.DOMEIN;
     await this.bot.telegram.setWebhook(`${domain}${this.webhookPath}`);
 
     this.app.use(this.bot.webhookCallback(this.webhookPath));

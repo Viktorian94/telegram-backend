@@ -34,7 +34,7 @@ export class TelegramService implements OnModuleInit {
                 {
                   text: 'Відкрити додаток',
                   web_app: {
-                    url: 'https://telegram-auth-frontend.vercel.app/',
+                    url: 'https://telegram-auth-frontend.vercel.app',
                   },
                 },
               ],

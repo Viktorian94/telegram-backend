@@ -1,7 +1,7 @@
 import { Controller, Get, Param, Query, Res } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { User } from './users.entity';
-import { TelegramService } from 'src/telegram/telegram.service';
+import { TelegramService } from '../telegram/telegram.service';
 import { Response } from 'express';
 
 @Controller('users')
@@ -43,13 +43,13 @@ export class UserController {
       const photoStream =
         await this.telegramService.getUserPhotoStream(telegramId);
       if (!photoStream) {
-        return res.status(404).send('Фото не найдено');
+        return res.status(404).send('Фото не знайдено');
       }
       res.setHeader('Content-Type', 'image/jpeg');
       photoStream.pipe(res);
     } catch (error) {
-      console.error('Ошибка при получении фото профиля:', error);
-      res.status(500).send('Ошибка сервера');
+      console.error('Помилка при отримані фото профіля:', error);
+      res.status(500).send('Помилка сервера');
     }
   }
 }

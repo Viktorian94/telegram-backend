@@ -24,7 +24,9 @@ export class AuthController {
       username: data.username,
       photoUrl: data.photo_url,
     });
-    return res.redirect(`/profile?userId=${user.id}`);
+    const frontendUrl = process.env.FRONTEND_URL as string;
+
+    return res.redirect(`${frontendUrl}/profile?userId=${user.id}`);
   }
 
   private checkTelegramAuth(data: any): boolean {

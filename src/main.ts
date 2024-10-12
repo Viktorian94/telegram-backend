@@ -7,7 +7,7 @@ async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
 
   app.enableCors({
-    origin: ['https://telegram-auth-frontend.vercel.app/'],
+    origin: ['https://telegram-auth-frontend.vercel.app'],
     credentials: true,
   });
 
